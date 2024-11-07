@@ -1,49 +1,33 @@
-import pyabf
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 def main():
-    # Update this line with your actual ABF file path
-    abf = pyabf.ABF("data.abf")
+    # Read the synthetic data from CSV file
+    df = pd.read_csv("synthetic_data.csv")
+    time = df["Time (s)"].values
+    amplitude = df["Amplitude (pA)"].values
 
     # Print basic information
-    print(f"ABF file loaded: {abf.abfID}")
-    print(f"Number of sweeps: {abf.sweepCount}")
-    print(f"Sampling rate: {abf.dataRate} Hz")
+    print("Synthetic data loaded")
+    print(f"Number of samples: {len(time)}")
+    print(f"Sampling rate: {1/(time[1] - time[0])} Hz")
 
-    # Plot the first sweep
-    abf.setSweep(0)
-    plt.plot(abf.sweepX, abf.sweepY)
+    # Plot the synthetic data
+    plt.plot(time, amplitude)
     plt.xlabel("Time (s)")
     plt.ylabel("Amplitude (pA)")
-    plt.title("Sweep 0")
+    plt.title("Synthetic Data")
     plt.show()
 
-    # Calculate the average sweep
-    sweeps = []
-    for sweep in abf.sweepList:
-        abf.setSweep(sweep)
-        sweeps.append(abf.sweepY)
+    # Calculate the average amplitude (just a simple example)
+    average_amplitude = np.mean(amplitude)
+    print(f"Average Amplitude: {average_amplitude} pA")
 
-    average_sweep = np.mean(sweeps, axis=0)
-
-    # Plot the average sweep
-    plt.plot(abf.sweepX, average_sweep, label="Average Sweep")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Amplitude (pA)")
-    plt.title("Average Sweep")
-    plt.legend()
-    plt.show()
-
-    # Save the average sweep to a CSV file
-    df = pd.DataFrame({
-        "Time (s)": abf.sweepX,
-        "Average Amplitude (pA)": average_sweep
-    })
-
-    df.to_csv("average_sweep.csv", index=False)
-    print("Data saved to average_sweep.csv")
+    # Save the average amplitude to a CSV file
+    df_avg = pd.DataFrame({"Time (s)": time, "Average Amplitude (pA)": [average_amplitude]*len(time)})
+    df_avg.to_csv("average_synthetic_data.csv", index=False)
+    print("Average synthetic data saved to average_synthetic_data.csv")
 
 if __name__ == "__main__":
     main()
