@@ -5,7 +5,7 @@ import pandas as pd
 
 def main():
     # Update this line with your actual ABF file path
-    abf = pyabf.ABF("example.abf")
+    abf = pyabf.ABF("data.abf")
 
     # Print basic information
     print(f"ABF file loaded: {abf.abfID}")
