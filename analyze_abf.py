@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 
 def main():
-    # Load the ABF file
-    abf = pyabf.ABF("your_file.abf")
+    # Update this line with your actual ABF file path
+    abf = pyabf.ABF("example.abf")
 
     # Print basic information
     print(f"ABF file loaded: {abf.abfID}")
