@@ -1,4 +1,5 @@
 # ABFDataAnalysis
+![Capture d'écran 2024-11-07 053330](https://github.com/user-attachments/assets/e9260817-d1b2-4dc9-8006-c0ceb2e7fd36)
 
 Automated analysis of electrophysiology data in ABF files using pyABF
 
